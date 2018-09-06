@@ -24,6 +24,8 @@ class CalcServiceProvider extends ServiceProvider
             __DIR__ . '/../config/calc.php', 'calc'
         );
 
+        $this->publishes([__DIR__ . '/../config/calc.php' => config_path('calc.php')]);
+
         $this->app->bind(
             'Zergbz1988\Calc\Interfaces\Calc',
             config('calc.calcClass')
