@@ -3,4 +3,4 @@
 use Illuminate\Support\Facades\Route;
 
 
-Route::get('calc', 'CalcController@calc');
+Route::get('calc', 'Zergbz1988\Calc\CalcController@calc');

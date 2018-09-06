@@ -11,6 +11,8 @@ class CalcResult
     const STATUS_OK = 'ok';
     const STATUS_ERROR = 'error';
 
+    const DEFAULT_MESSAGE = 'Ошибка по-умолчанию';
+
     private $status;
     private $message;
 
@@ -19,7 +21,7 @@ class CalcResult
      */
     public function getStatus() : string
     {
-        return $this->status;
+        return $this->status ?? self::STATUS_ERROR;
     }
 
 
@@ -40,7 +42,7 @@ class CalcResult
      */
     public function getMessage() : string
     {
-        return $this->message;
+        return $this->message ?? self::DEFAULT_MESSAGE;
     }
 
     /**

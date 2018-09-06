@@ -22,7 +22,7 @@ class CalcController extends Controller
      */
     public function calc(Request $request, Calc $calc)
     {
-        $validator = Validator::make($request->all(), ['input' => 'require|string']);
+        $validator = Validator::make($request->all(), ['input' => 'required|string']);
 
         if ($validator->fails()) {
             $calcResult = new CalcResult();

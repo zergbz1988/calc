@@ -30,5 +30,7 @@ class CalcServiceProvider extends ServiceProvider
             'Zergbz1988\Calc\Interfaces\Calc',
             config('calc.calcClass')
         );
+
+        $this->app->make('Zergbz1988\Calc\CalcController');
     }
 }
