@@ -7,12 +7,17 @@ use Orchestra\Testbench\TestCase;
  */
 class CalcTest extends TestCase
 {
+    protected function getPackageProviders($app)
+    {
+        return ['Zergbz1988\Calc\CalcServiceProvider'];
+    }
+
     /**
      * Проверка пустого значения в браузере
      */
     public function testEmptyInputInBrowser()
     {
-        $this->get('/calc', ['input' => ''])->assertExactJson([
+        $this->get('/calc?input=')->assertExactJson([
             'status' => 'error',
             'message' => 'Необходимо указать строковое значение поля input'
         ]);
@@ -23,7 +28,7 @@ class CalcTest extends TestCase
      */
     public function testInvalidInputInBrowser()
     {
-        $this->get('/calc', ['input' => '7*20+3)'])->assertExactJson([
+        $this->get('/calc?input=7*20+3)')->assertExactJson([
             'status' => 'error',
             'message' => 'Передан неправильный аргумент для вычисления!'
         ]);
@@ -34,7 +39,7 @@ class CalcTest extends TestCase
      */
     public function testAddInBrowser()
     {
-        $this->get('/calc', ['input' => '3+2'])->assertExactJson([
+        $this->get('/calc?input=3+2')->assertExactJson([
             'status' => 'ok',
             'message' => '5'
         ]);
@@ -45,7 +50,7 @@ class CalcTest extends TestCase
      */
     public function testSubInBrowser()
     {
-        $this->get('/calc', ['input' => '3-2'])->assertExactJson([
+        $this->get('/calc?input=3-2')->assertExactJson([
             'status' => 'ok',
             'message' => '1'
         ]);
@@ -56,7 +61,7 @@ class CalcTest extends TestCase
      */
     public function testMultiInBrowser()
     {
-        $this->get('/calc', ['input' => '3*2'])->assertExactJson([
+        $this->get('/calc?input=3*2')->assertExactJson([
             'status' => 'ok',
             'message' => '6'
         ]);
@@ -67,7 +72,7 @@ class CalcTest extends TestCase
      */
     public function testDivInBrowser()
     {
-        $this->get('/calc', ['input' => '3/2'])->assertExactJson([
+        $this->get('/calc?input=3/2')->assertExactJson([
             'status' => 'ok',
             'message' => '1.5'
         ]);
@@ -78,7 +83,7 @@ class CalcTest extends TestCase
      */
     public function testPowInBrowser()
     {
-        $this->get('/calc', ['input' => '3^2'])->assertExactJson([
+        $this->get('/calc?input=3^2')->assertExactJson([
             'status' => 'ok',
             'message' => '9'
         ]);
@@ -89,7 +94,7 @@ class CalcTest extends TestCase
      */
     public function testPriorityInBrowser()
     {
-        $this->get('/calc', ['input' => '3+2*4^2'])->assertExactJson([
+        $this->get('/calc?input=3+2*4^2')->assertExactJson([
             'status' => 'ok',
             'message' => '35'
         ]);
@@ -100,7 +105,7 @@ class CalcTest extends TestCase
      */
     public function testBracketsInBrowser()
     {
-        $this->get('/calc', ['input' => '(3+2)*4^2'])->assertExactJson([
+        $this->get('/calc?input=(3+2)*4^2')->assertExactJson([
             'status' => 'ok',
             'message' => '80'
         ]);
@@ -111,7 +116,8 @@ class CalcTest extends TestCase
      */
     public function testEmptyInputInConsole()
     {
-        $this->artisan('calc:run', ['input' => ''])->expectsOutput("\n\nNot enough arguments (missing: \"input\").\n\n\n");
+        $this->expectException('RuntimeException');
+        $this->artisan('calc:run');
     }
 
     /**
@@ -119,8 +125,8 @@ class CalcTest extends TestCase
      */
     public function testInvalidInputInConsole()
     {
-        $this->artisan('calc:run', ['input' => '7*20+3)'])->expectsOutput("status: error\n
-        message: Передан неправильный аргумент для вычисления!\n");
+        $this->expectOutputString("status: error\nmessage: Передан неправильный аргумент для вычисления!\n");
+        $this->artisan('calc:run', ['input' => '7*20+3)']);
     }
 
     /**
@@ -128,8 +134,8 @@ class CalcTest extends TestCase
      */
     public function testAddInConsole()
     {
-        $this->artisan('calc:run', ['input' => '3+2'])->expectsOutput("status: ok\n
-        message: 5\n");
+        $this->expectOutputString("status: ok\nmessage: 5\n");
+        $this->artisan('calc:run', ['input' => '3+2']);
     }
 
     /**
@@ -137,8 +143,8 @@ class CalcTest extends TestCase
      */
     public function testSubInConsole()
     {
-        $this->artisan('calc:run', ['input' => '3-2'])->expectsOutput("status: ok\n
-        message: 1\n");
+        $this->expectOutputString("status: ok\nmessage: 1\n");
+        $this->artisan('calc:run', ['input' => '3-2']);
     }
 
     /**
@@ -146,8 +152,8 @@ class CalcTest extends TestCase
      */
     public function testMultiInConsole()
     {
-        $this->artisan('calc:run', ['input' => '3*2'])->expectsOutput("status: ok\n
-        message: 6\n");
+        $this->expectOutputString("status: ok\nmessage: 6\n");
+        $this->artisan('calc:run', ['input' => '3*2']);
     }
 
     /**
@@ -155,17 +161,17 @@ class CalcTest extends TestCase
      */
     public function testDivInConsole()
     {
-        $this->artisan('calc:run', ['input' => '3/2'])->expectsOutput("status: ok\n
-        message: 1.5\n");
+        $this->expectOutputString("status: ok\nmessage: 1.5\n");
+        $this->artisan('calc:run', ['input' => '3/2']);
     }
 
     /**
-     * Проверка возведения в степень в консоли (приходится писать ^^ вместо ^)
+     * Проверка возведения в степень в консоли
      */
     public function testPowInConsole()
     {
-        $this->artisan('calc:run', ['input' => '3^^2'])->expectsOutput("status: ok\n
-        message: 9\n");
+        $this->expectOutputString("status: ok\nmessage: 9\n");
+        $this->artisan('calc:run', ['input' => '3^2']);
     }
 
     /**
@@ -173,8 +179,8 @@ class CalcTest extends TestCase
      */
     public function testPriorityInConsole()
     {
-        $this->artisan('calc:run', ['input' => '3+2*4^^2'])->expectsOutput("status: ok\n
-        message: 35\n");
+        $this->expectOutputString("status: ok\nmessage: 35\n");
+        $this->artisan('calc:run', ['input' => '3+2*4^2']);
     }
 
     /**
@@ -182,7 +188,7 @@ class CalcTest extends TestCase
      */
     public function testBracketsInConsole()
     {
-        $this->artisan('calc:run', ['input' => '(3+2)*4^^2'])->expectsOutput("status: ok\n
-        message: 80\n");
+        $this->expectOutputString("status: ok\nmessage: 80\n");
+        $this->artisan('calc:run', ['input' => '(3+2)*4^2']);
     }
 }

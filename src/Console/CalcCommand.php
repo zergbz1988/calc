@@ -54,7 +54,6 @@ class CalcCommand extends Command
     /**
      * Execute the console command.
      *
-     * @return mixed
      */
     public function handle()
     {
@@ -62,8 +61,6 @@ class CalcCommand extends Command
 
         echo 'status: ' . $calcResult->getStatus() . "\n";
         echo 'message: ' . $calcResult->getMessage() . "\n";
-
-        exit(0);
     }
 
 }
