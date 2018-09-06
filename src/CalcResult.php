@@ -11,7 +11,7 @@ class CalcResult
     const STATUS_OK = 'ok';
     const STATUS_ERROR = 'error';
 
-    const DEFAULT_MESSAGE = 'Ошибка по-умолчанию';
+    const DEFAULT_MESSAGE = 'Пустой результат';
 
     private $status;
     private $message;

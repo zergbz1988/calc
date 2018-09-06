@@ -60,10 +60,10 @@ class CalcCommand extends Command
     {
         $calcResult = $this->calc->getCalcResult($this->argument('input'));
 
-        return response()->json([
-            'status' => $calcResult->getStatus(),
-            'message' => $calcResult->getMessage()
-        ]);
+        echo 'status: ' . $calcResult->getStatus() . "\n";
+        echo 'message: ' . $calcResult->getMessage() . "\n";
+
+        exit(0);
     }
 
 }
