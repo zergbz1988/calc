@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'calculatorClass' => 'Zergbz1988\Calc\DefaultCalc'
+    'calcClass' => 'Zergbz1988\Calc\DefaultCalc'
 ];

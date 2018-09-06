@@ -1,6 +1,6 @@
 <?php
 
-namespace Zergbz1988\Calc\Contracts;
+namespace Zergbz1988\Calc\Interfaces;
 
 use Zergbz1988\Calc\CalcResult;
 

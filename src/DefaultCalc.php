@@ -8,7 +8,7 @@
 
 namespace Zergbz1988\Calc;
 
-use Zergbz1988\Calc\Contracts\Calc;
+use Zergbz1988\Calc\Interfaces\Calc;
 
 /**
  * Class DefaultCalc

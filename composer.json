@@ -32,7 +32,10 @@
     "laravel": {
       "providers": [
         "Zergbz1988\\Calc\\CalcServiceProvider"
-      ]
+      ],
+      "aliases": {
+        "Calc": "Zergbz1988\\Calc\\Facades\\Calc"
+      }
     }
   }
 }
