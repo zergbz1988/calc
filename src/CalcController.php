@@ -27,7 +27,7 @@ class CalcController extends Controller
         if ($validator->fails()) {
             $calcResult = new CalcResult();
             $calcResult->setErrorStatus();
-            $calcResult->setMessage($validator->errors()->first());
+            $calcResult->setMessage('Необходимо указать строковое значение поля input');
 
             return response()->json([
                 'status' => $calcResult->getStatus(),
@@ -35,7 +35,7 @@ class CalcController extends Controller
             ]);
         }
 
-        $input = $request->input('input');
+        $input = str_replace(' ', '+', $request->input('input'));
         $calcResult = $calc->getCalcResult($input);
 
         return response()->json([

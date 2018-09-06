@@ -15,7 +15,7 @@
     "laravel/framework":"~5.6"
   },
   "autoload-dev": {
-    "classmap": ["tests/TestCase.php"]
+    "classmap": ["tests/CalcTest.php"]
   },
   "require-dev": {
     "orchestra/testbench": "~3.0"
@@ -35,10 +35,7 @@
     "laravel": {
       "providers": [
         "Zergbz1988\\Calc\\CalcServiceProvider"
-      ],
-      "aliases": {
-        "Calc": "Zergbz1988\\Calc\\Facades\\Calc"
-      }
+      ]
     }
   }
 }

@@ -33,7 +33,7 @@ class DefaultCalc implements Calc
     public function getCalcResult(string $input): CalcResult
     {
         $input = str_replace(' ', '', $input);
-        $inputStack = preg_split('/([+-\/*()\^]{1})/', $input, -1, PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE);
+        $inputStack = preg_split('/([+\-\/*()\^]{1})/', $input, -1, PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE);
 
         if (empty($inputStack)) {
             return $this->errorResult();
@@ -72,6 +72,9 @@ class DefaultCalc implements Calc
                 if ($word === '(') {
                     array_push($stack, $word);
                 } else {
+                    if (!in_array('(', $stack)) {
+                        return [];
+                    }
                     while (($tmp = array_pop($stack)) !== '(') {
                         array_push($out, $tmp);
                     }
@@ -112,6 +115,11 @@ class DefaultCalc implements Calc
             } else {
                 $num1 = array_pop($out);
                 $num2 = array_pop($out);
+
+                if (!isset($num1) || !isset($num2)) {
+                    return [];
+                }
+
                 switch ($word) {
                     case '+':
                         $tmp = $num2 + $num1;
