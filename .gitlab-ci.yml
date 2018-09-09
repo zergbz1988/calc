@@ -2,10 +2,12 @@ before_script:
 # Install git (the php image doesn't have it) which is required by composer
 - apt-get update -yqq
 - apt-get install git -yqq
+- apt-get install zip unzip php5.6-zip
 # Install composer
 - curl -sS https://getcomposer.org/installer | php
 # Install all project dependencies
 - php composer.phar install --dev
+- docker-php-ext-install zip
 
 # We test PHP5.3
 test:5.3:
