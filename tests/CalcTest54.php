@@ -12,7 +12,7 @@ class CalcTest54 extends TestCase
 {
     protected $calc = null;
 
-    public function getPackageProviders($app)
+    public function getPackageProviders()
     {
         return ['Zergbz1988\Calc\CalcServiceProvider'];
     }
