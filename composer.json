@@ -3,7 +3,7 @@
   "description": "A package to evaluate string expression",
   "keywords": ["laravel", "laravel-calc", "laravel5-package", "PHP", "laravel5"],
   "license": "MIT",
-  "homepage": "https://github.com/zergbz1988/laravel-calc",
+  "homepage": "https://gitlab.com/zergbz1988/laravel-calc",
   "authors": [
     {
       "name": "Komarov Marat",
@@ -11,8 +11,8 @@
     }
   ],
   "require": {
-    "php": ">=5.3.0",
-    "laravel/framework":"~5.6"
+    "php": ">=5.4.0",
+    "laravel/framework":">=4.2"
   },
   "require-dev": {
     "orchestra/testbench": "~3.0",
