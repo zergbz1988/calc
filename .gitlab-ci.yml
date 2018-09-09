@@ -4,13 +4,13 @@ before_script:
 - apt-get install git -yqq
 - apt-get install zip unzip
 # Install composer
-- curl -sS http://getcomposer.org/installer | php
+- curl -sS https://getcomposer.org/installer | php
 # Install all project dependencies
 - php composer.phar install --dev
 
 # We test PHP5.3
 test:5.3:
-  image: php:5.3
+  image: tomsowerby/php-5.3
   script:
   - vendor/bin/phpunit tests/CalcTest.php
 
