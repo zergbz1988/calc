@@ -47,9 +47,7 @@ class CalcServiceProvider extends ServiceProvider
 
     protected function loadRoutesFrom($path)
     {
-        if (! $this->app->routesAreCached()) {
-            require $path;
-        }
+        require $path;
     }
 
     protected function mergeConfigFrom($path, $key)
