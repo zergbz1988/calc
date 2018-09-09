@@ -11,8 +11,9 @@ use Illuminate\Support\ServiceProvider;
 class CalcServiceProvider extends ServiceProvider
 {
 
-    protected static $publishes = [];
-    protected static $publishGroups = [];
+    public static $publishes = [];
+
+    public static $publishGroups = [];
 
     public function boot()
     {
