@@ -16,7 +16,8 @@
   },
   "require-dev": {
     "orchestra/testbench": ">=2.0",
-    "mockery/mockery": ">=0.9.9"
+    "mockery/mockery": ">=0.9.9",
+    "phpunit/phpunit": ">=4.8.36"
   },
   "autoload-dev": {
     "classmap": ["tests/CalcTest.php"]
