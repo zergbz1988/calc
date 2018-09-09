@@ -6,13 +6,7 @@ before_script:
 # Install composer
 - curl -sS https://getcomposer.org/installer | php
 # Install all project dependencies
-- php -d memory_limit=-1 composer.phar install --dev
-
-# We test PHP5.3
-test:5.3:
-  image: helder/php-5.3
-  script:
-  - vendor/bin/phpunit tests/CalcTest54.php
+- php composer.phar install --dev
 
 # We test PHP5.4
 test:5.4:
