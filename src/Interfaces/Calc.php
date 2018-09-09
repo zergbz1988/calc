@@ -2,8 +2,6 @@
 
 namespace Zergbz1988\Calc\Interfaces;
 
-use Zergbz1988\Calc\CalcResult;
-
 /**
  * Interface Calc
  * @package Zergbz1988\Calc\Contracts
@@ -11,8 +9,8 @@ use Zergbz1988\Calc\CalcResult;
 interface Calc
 {
     /**
-     * @param string $input
+     * @param $input
      * @return mixed
      */
-    public function getCalcResult(string $input) : CalcResult;
+    public function getCalcResult($input);
 }

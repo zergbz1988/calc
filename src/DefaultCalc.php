@@ -28,9 +28,9 @@ class DefaultCalc implements Calc
 
     /**
      * @param string $input
-     * @return CalcResult
+     * @return mixed|CalcResult
      */
-    public function getCalcResult(string $input): CalcResult
+    public function getCalcResult($input)
     {
         if (empty($input)) {
             return $this->errorResult('Необходимо указать строковое значение поля input');
@@ -64,7 +64,7 @@ class DefaultCalc implements Calc
      * @param array $input
      * @return array
      */
-    private function getExpression(array $input) : array
+    private function getExpression(array $input)
     {
         $out = [];
         $stack = [];
@@ -109,7 +109,7 @@ class DefaultCalc implements Calc
      * @param array $input
      * @return array
      */
-    private function counting(array $input) : array
+    private function counting(array $input)
     {
         $out = [];
 
@@ -154,7 +154,7 @@ class DefaultCalc implements Calc
      * @param string $word
      * @return bool
      */
-    private function isOperator(string $word): bool
+    private function isOperator($word)
     {
         return in_array($word, ['+', '-', '*', '/', '^']);
     }
@@ -163,7 +163,7 @@ class DefaultCalc implements Calc
      * @param string $word
      * @return bool
      */
-    private function isRoundBrackets(string $word): bool
+    private function isRoundBrackets($word)
     {
         return in_array($word, ['(', ')']);
     }
@@ -172,7 +172,7 @@ class DefaultCalc implements Calc
      * @param string $operator
      * @return int
      */
-    private function getPriority(string $operator) : int
+    private function getPriority($operator)
     {
         switch ($operator) {
             case '(':
@@ -198,7 +198,7 @@ class DefaultCalc implements Calc
      * @param string $message
      * @return CalcResult
      */
-    private function errorResult(string $message = 'Передан неправильный аргумент для вычисления!'): CalcResult
+    private function errorResult($message = 'Передан неправильный аргумент для вычисления!')
     {
         $this->calcResult->setErrorStatus();
         $this->calcResult->setMessage($message);
@@ -210,7 +210,7 @@ class DefaultCalc implements Calc
      * @param string $result
      * @return CalcResult
      */
-    private function okResult(string $result): CalcResult
+    private function okResult($result)
     {
         $this->calcResult->setOkStatus();
         $this->calcResult->setMessage($result);

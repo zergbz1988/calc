@@ -24,7 +24,7 @@ class CalcTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $this->calc = resolve(Calc::class);
+        $this->calc = resolve('Zergbz1988\Calc\Interfaces\Calc');
     }
 
     /**** UNIT TESTS ****/

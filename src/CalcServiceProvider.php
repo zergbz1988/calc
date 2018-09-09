@@ -3,10 +3,11 @@
 namespace Zergbz1988\Calc;
 
 use Illuminate\Support\ServiceProvider;
-use Zergbz1988\Calc\Console\CalcCommand;
-use Zergbz1988\Calc\Interfaces\Calc;
 
-
+/**
+ * Class CalcServiceProvider
+ * @package Zergbz1988\Calc
+ */
 class CalcServiceProvider extends ServiceProvider
 {
     public function boot()
@@ -15,7 +16,7 @@ class CalcServiceProvider extends ServiceProvider
 
         if ($this->app->runningInConsole()) {
             $this->commands([
-                CalcCommand::class,
+                'Zergbz1988\Calc\Console\CalcCommand',
             ]);
         }
     }
@@ -32,7 +33,7 @@ class CalcServiceProvider extends ServiceProvider
         $calcClass = config('calc.calcClass');
 
         $this->app->bind(
-            Calc::class,
+            'Zergbz1988\Calc\Interfaces\Calc',
             $calcClass
         );
 

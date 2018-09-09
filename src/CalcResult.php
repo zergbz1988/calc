@@ -19,19 +19,19 @@ class CalcResult
     /**
      * @return string
      */
-    public function getStatus() : string
+    public function getStatus()
     {
-        return $this->status ?? self::STATUS_ERROR;
+        return isset($this->status) ? $this->status : self::STATUS_ERROR;
     }
 
 
-    public function setOkStatus() : void
+    public function setOkStatus()
     {
         $this->status = self::STATUS_OK;
     }
 
 
-    public function setErrorStatus() : void
+    public function setErrorStatus()
     {
         $this->status = self::STATUS_ERROR;
     }
@@ -40,15 +40,15 @@ class CalcResult
     /**
      * @return string
      */
-    public function getMessage() : string
+    public function getMessage()
     {
-        return $this->message ?? self::DEFAULT_MESSAGE;
+        return isset($this->message) ? $this->message : self::DEFAULT_MESSAGE;
     }
 
     /**
-     * @param string $message
+     * @param $message
      */
-    public function setMessage(string $message) : void
+    public function setMessage($message)
     {
         $this->message = $message;
     }
@@ -56,7 +56,7 @@ class CalcResult
     /**
      * @return array
      */
-    public function toArray() : array
+    public function toArray()
     {
         return [
             'status' => $this->getStatus(),
