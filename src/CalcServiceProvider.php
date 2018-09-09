@@ -52,4 +52,30 @@ class CalcServiceProvider extends ServiceProvider
 
         $this->app['config']->set($key, array_merge(require $path, $config));
     }
+
+    /**
+     * Register paths to be published by the publish command.
+     *
+     * @param  array  $paths
+     * @param  string  $group
+     * @return void
+     */
+    protected function publishes(array $paths, $group = null)
+    {
+        $class = 'Zergbz1988\Calc\CalcServiceProvider';
+
+        if (! array_key_exists($class, static::$publishes)) {
+            static::$publishes[$class] = [];
+        }
+
+        static::$publishes[$class] = array_merge(static::$publishes[$class], $paths);
+
+        if ($group) {
+            if (! array_key_exists($group, static::$publishGroups)) {
+                static::$publishGroups[$group] = [];
+            }
+
+            static::$publishGroups[$group] = array_merge(static::$publishGroups[$group], $paths);
+        }
+    }
 }
