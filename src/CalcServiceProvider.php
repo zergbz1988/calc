@@ -2,6 +2,7 @@
 
 namespace Zergbz1988\Calc;
 
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
 
 /**
@@ -34,7 +35,7 @@ class CalcServiceProvider extends ServiceProvider
 
         $this->publishes([__DIR__ . '/../config/calc.php' => base_path('config' . DIRECTORY_SEPARATOR . 'calc.php')]);
 
-        $calcClass = config('calc.calcClass');
+        $calcClass = Config::get('calc.calcClass');
 
         $this->app->bind(
             'Zergbz1988\Calc\Interfaces\Calc',
