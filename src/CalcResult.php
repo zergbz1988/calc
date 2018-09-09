@@ -52,4 +52,15 @@ class CalcResult
     {
         $this->message = $message;
     }
+
+    /**
+     * @return array
+     */
+    public function toArray() : array
+    {
+        return [
+            'status' => $this->getStatus(),
+            'message' => $this->getMessage()
+        ];
+    }
 }

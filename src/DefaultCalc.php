@@ -32,6 +32,10 @@ class DefaultCalc implements Calc
      */
     public function getCalcResult(string $input): CalcResult
     {
+        if (empty($input)) {
+            return $this->errorResult('Необходимо указать строковое значение поля input');
+        }
+
         $input = str_replace(' ', '', $input);
         $inputStack = preg_split('/([+\-\/*()\^]{1})/', $input, -1, PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE);
 
@@ -198,6 +202,7 @@ class DefaultCalc implements Calc
     {
         $this->calcResult->setErrorStatus();
         $this->calcResult->setMessage($message);
+
         return $this->calcResult;
     }
 
