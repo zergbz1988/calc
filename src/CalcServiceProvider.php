@@ -10,6 +10,10 @@ use Illuminate\Support\ServiceProvider;
  */
 class CalcServiceProvider extends ServiceProvider
 {
+
+    protected static $publishes = [];
+    protected static $publishGroups = [];
+
     public function boot()
     {
         $this->loadRoutesFrom(__DIR__ . '/routes.php');
