@@ -21,7 +21,6 @@ class CalcServiceProvider extends ServiceProvider
         }
     }
 
-
     public function register()
     {
         $this->mergeConfigFrom(
@@ -39,4 +38,12 @@ class CalcServiceProvider extends ServiceProvider
 
         $this->app->make('Zergbz1988\Calc\CalcController');
     }
+
+    protected function loadRoutesFrom($path)
+    {
+        if (! $this->app->routesAreCached()) {
+            require $path;
+        }
+    }
+
 }
