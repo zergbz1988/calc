@@ -27,7 +27,7 @@ class CalcServiceProvider extends ServiceProvider
             __DIR__ . '/../config/calc.php', 'calc'
         );
 
-        $this->publishes([__DIR__ . '/../config/calc.php' => config_path('calc.php')]);
+        $this->publishes([__DIR__ . '/../config/calc.php' => app()->make('path.config').(DIRECTORY_SEPARATOR . 'calc.php')]);
 
         $calcClass = config('calc.calcClass');
 
