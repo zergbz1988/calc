@@ -10,7 +10,7 @@ before_script:
 
 # We test PHP5.3
 test:5.3:
-  image: edersondev/php5.3
+  image: yappabe/apache-php:5.3
   script:
   - vendor/bin/phpunit tests/CalcTest.php
 
