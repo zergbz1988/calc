@@ -15,8 +15,8 @@
     "laravel/framework":">=4.2"
   },
   "require-dev": {
-    "orchestra/testbench": "~3.0",
-    "mockery/mockery": "^1.1"
+    "orchestra/testbench": ">=2.0",
+    "mockery/mockery": ">=0.9.9"
   },
   "autoload-dev": {
     "classmap": ["tests/CalcTest.php"]
