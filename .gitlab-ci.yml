@@ -4,7 +4,7 @@ before_script:
 - apt-get install git -yqq
 - apt-get install zip unzip
 # Install composer
-- curl -sS https://getcomposer.org/installer | php
+- curl -sS http://getcomposer.org/installer | php
 # Install all project dependencies
 - php composer.phar install --dev
 
