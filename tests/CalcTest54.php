@@ -12,7 +12,7 @@ class CalcTest54 extends TestCase
 {
     protected $calc = null;
 
-    public function getPackageProviders()
+    protected function getPackageProviders()
     {
         return ['Zergbz1988\Calc\CalcServiceProvider'];
     }
@@ -23,7 +23,7 @@ class CalcTest54 extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $this->calc = resolve('Zergbz1988\Calc\Interfaces\Calc');
+        $this->calc = app()->make('Zergbz1988\Calc\Interfaces\Calc');
     }
 
     /**** UNIT TESTS ****/
@@ -161,10 +161,10 @@ class CalcTest54 extends TestCase
      */
     public function testEmptyInputInBrowser()
     {
-        $this->get('/calc?input=')->assertExactJson([
+        $this->get('/calc?input=')->assertJson(json_encode([
             'status' => 'error',
             'message' => 'Необходимо указать строковое значение поля input'
-        ]);
+        ]));
     }
 
     /**
@@ -172,10 +172,10 @@ class CalcTest54 extends TestCase
      */
     public function testInvalidInputInBrowser()
     {
-        $this->get('/calc?input=7*20+3)')->assertExactJson([
+        $this->get('/calc?input=7*20+3)')->assertJson(json_encode([
             'status' => 'error',
             'message' => 'Передан неправильный аргумент для вычисления!'
-        ]);
+        ]));
     }
 
     /**
@@ -183,10 +183,10 @@ class CalcTest54 extends TestCase
      */
     public function testAddInBrowser()
     {
-        $this->get('/calc?input=3+2')->assertExactJson([
+        $this->get('/calc?input=3+2')->assertJson(json_encode([
             'status' => 'ok',
             'message' => '5'
-        ]);
+        ]));
     }
 
     /**
@@ -194,10 +194,10 @@ class CalcTest54 extends TestCase
      */
     public function testSubInBrowser()
     {
-        $this->get('/calc?input=3-2')->assertExactJson([
+        $this->get('/calc?input=3-2')->assertJson(json_encode([
             'status' => 'ok',
             'message' => '1'
-        ]);
+        ]));
     }
 
     /**
@@ -205,10 +205,10 @@ class CalcTest54 extends TestCase
      */
     public function testMultiInBrowser()
     {
-        $this->get('/calc?input=3*2')->assertExactJson([
+        $this->get('/calc?input=3*2')->assertJson(json_encode([
             'status' => 'ok',
             'message' => '6'
-        ]);
+        ]));
     }
 
     /**
@@ -216,10 +216,10 @@ class CalcTest54 extends TestCase
      */
     public function testDivInBrowser()
     {
-        $this->get('/calc?input=3/2')->assertExactJson([
+        $this->get('/calc?input=3/2')->assertJson(json_encode([
             'status' => 'ok',
             'message' => '1.5'
-        ]);
+        ]));
     }
 
     /**
@@ -227,10 +227,10 @@ class CalcTest54 extends TestCase
      */
     public function testPowInBrowser()
     {
-        $this->get('/calc?input=3^2')->assertExactJson([
+        $this->get('/calc?input=3^2')->assertJson(json_encode([
             'status' => 'ok',
             'message' => '9'
-        ]);
+        ]));
     }
 
     /**
@@ -238,10 +238,10 @@ class CalcTest54 extends TestCase
      */
     public function testPriorityInBrowser()
     {
-        $this->get('/calc?input=3+2*4^2')->assertExactJson([
+        $this->get('/calc?input=3+2*4^2')->assertJson(json_encode([
             'status' => 'ok',
             'message' => '35'
-        ]);
+        ]));
     }
 
     /**
@@ -249,9 +249,9 @@ class CalcTest54 extends TestCase
      */
     public function testBracketsInBrowser()
     {
-        $this->get('/calc?input=(3+2)*4^2')->assertExactJson([
+        $this->get('/calc?input=(3+2)*4^2')->assertJson(json_encode([
             'status' => 'ok',
             'message' => '80'
-        ]);
+        ]));
     }
 }
