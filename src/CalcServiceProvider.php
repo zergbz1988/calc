@@ -4,6 +4,8 @@ namespace Zergbz1988\Calc;
 
 use Illuminate\Support\ServiceProvider;
 use Zergbz1988\Calc\Console\CalcCommand;
+use Zergbz1988\Calc\Interfaces\Calc;
+
 
 class CalcServiceProvider extends ServiceProvider
 {
@@ -18,6 +20,7 @@ class CalcServiceProvider extends ServiceProvider
         }
     }
 
+
     public function register()
     {
         $this->mergeConfigFrom(
@@ -26,9 +29,11 @@ class CalcServiceProvider extends ServiceProvider
 
         $this->publishes([__DIR__ . '/../config/calc.php' => config_path('calc.php')]);
 
+        $calcClass = config('calc.calcClass');
+
         $this->app->bind(
-            'Zergbz1988\Calc\Interfaces\Calc',
-            config('calc.calcClass')
+            Calc::class,
+            $calcClass
         );
 
         $this->app->make('Zergbz1988\Calc\CalcController');
