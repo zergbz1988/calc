@@ -10,10 +10,9 @@ use Zergbz1988\Calc\Interfaces\Calc;
  */
 class CalcTest extends TestCase
 {
-
     protected $calc = null;
 
-    protected function getPackageProviders($app)
+    public function getPackageProviders($app)
     {
         return ['Zergbz1988\Calc\CalcServiceProvider'];
     }
